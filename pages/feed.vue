@@ -29,11 +29,5 @@
 </template>
 
 <script>
-export default {
-  computed: {
-    search() {
-      return this.$store.state.search
-    },
-  },
-}
+export default {}
 </script>
