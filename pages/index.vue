@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <v-card>
+      <v-card class="pa-5">
         <v-card-title class="headline">
           Discover tons of movies and series
         </v-card-title>
@@ -15,8 +15,11 @@
         <v-card-actions>
           <v-btn
             color="primary"
-            nuxt
-            to="/inspire"
+            elevation="10"
+            block
+            tile
+            to="/movies"
+            @click="fetchMovies"
             :disabled="search.length ? false : true"
           >
             Search
@@ -30,9 +33,19 @@
 
 <script>
 export default {
+  data() {
+    return {
+      search: '',
+    }
+  },
   computed: {
-    search() {
-      return this.$store.state.search
+    state() {
+      return this.$store.state
+    },
+  },
+  methods: {
+    fetchMovies() {
+      this.$store.dispatch('fetchMoviesAsync', this.search)
     },
   },
 }
