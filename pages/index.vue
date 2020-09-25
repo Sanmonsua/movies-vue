@@ -19,6 +19,7 @@
               elevation="10"
               block
               tile
+              :loading="loading"
               @click="fetchMovies"
               :disabled="search.length ? false : true"
             >
@@ -40,7 +41,8 @@ export default {
   data() {
     return {
       search: '',
-      err: null,
+      err: '',
+      loading: false,
     }
   },
   computed: {
@@ -50,6 +52,7 @@ export default {
   },
   methods: {
     async fetchMovies() {
+      this.loading = true
       await this.$store.dispatch('fetchMoviesAsync', this.search)
       if (this.$store.state.movies) {
         this.$router.push({
@@ -58,6 +61,7 @@ export default {
       } else {
         this.err = 'Not Found :('
       }
+      this.loading = false
     },
   },
 }

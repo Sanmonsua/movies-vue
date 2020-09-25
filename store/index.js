@@ -51,8 +51,14 @@ const createStore = () => {
       setMovies: (state, payload) => {
         state.movies = payload
       },
-      setPage: (state, payload) => {
-        state.page = payload.page
+      loadMovies: (state, payload) => {
+        state.movies = [...state.movies, ...payload]
+      },
+      initPage: (state) => {
+        state.page = 1
+      },
+      nextPage: (state) => {
+        state.page++
       },
       setSearch: (state, newSearch) => {
         state.search = newSearch
@@ -61,6 +67,7 @@ const createStore = () => {
     actions: {
       async fetchMoviesAsync(context, search) {
         try {
+          context.commit('initPage')
           const response = await fetch(
             `https://www.omdbapi.com/?apikey=55c7fd4a&s=${search}&page=${context.state.page}`
           )
@@ -70,6 +77,19 @@ const createStore = () => {
           context.commit('setSearch', search)
         } catch (err) {
           alert(err)
+        }
+      },
+      async loadMore(context) {
+        try {
+          context.commit('nextPage')
+          const response = await fetch(
+            `https://www.omdbapi.com/?apikey=55c7fd4a&s=${context.state.search}&page=${context.state.page}`
+          )
+          const data = await response.json()
+          console.log(data)
+          context.commit('loadMovies', data.Search)
+        } catch (err) {
+          context.commit('initPage')
         }
       },
     },

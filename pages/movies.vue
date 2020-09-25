@@ -7,6 +7,11 @@
         :item="movie"
         :color="color(index)"
       ></movie>
+      <v-row justify="center" align="center">
+        <v-btn :loading="isLoading" :disabled="isLoading" @click="loadMore"
+          >Load more</v-btn
+        >
+      </v-row>
     </v-flex>
   </v-layout>
 </template>
@@ -16,11 +21,10 @@ import Movie from '../components/Movie.vue'
 import colors from '../colors'
 
 export default {
-  beforeDestroy() {
-    this.$store.commit('setSearch', '')
-  },
-  components: {
-    Movie,
+  data() {
+    return {
+      isLoading: false,
+    }
   },
   computed: {
     movies() {
@@ -29,6 +33,17 @@ export default {
     color() {
       return (index) => colors[index % colors.length]
     },
+  },
+  methods: {
+    async loadMore() {
+      await this.$store.dispatch('loadMore')
+    },
+  },
+  components: {
+    Movie,
+  },
+  beforeDestroy() {
+    this.$store.commit('setSearch', '')
   },
 }
 </script>
