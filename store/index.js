@@ -44,6 +44,9 @@ const createStore = () => {
       page: 1,
       search: '',
     }),
+    getters: {
+      getMovies: (state) => state.movies,
+    },
     mutations: {
       setMovies: (state, payload) => {
         state.movies = payload
@@ -51,8 +54,8 @@ const createStore = () => {
       setPage: (state, payload) => {
         state.page = payload.page
       },
-      setSearch: (state, payload) => {
-        state.search = payload.search
+      setSearch: (state, newSearch) => {
+        state.search = newSearch
       },
     },
     actions: {
@@ -64,6 +67,7 @@ const createStore = () => {
           const data = await response.json()
           console.log(data)
           context.commit('setMovies', data.Search)
+          context.commit('setSearch', search)
         } catch (err) {
           alert(err)
         }
