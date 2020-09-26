@@ -13,6 +13,9 @@
           <v-card-subtitle>
             {{ item.Year }} - {{ item.imdbID }}
           </v-card-subtitle>
+          <v-card-actions>
+            <v-btn text :to="'movies/' + item.imdbID">More info</v-btn>
+          </v-card-actions>
         </div>
 
         <v-avatar class="ma-3" size="125" tile>
@@ -25,6 +28,15 @@
 
 <script>
 export default {
-  props: ['item', 'color'],
+  props: {
+    item: {
+      type: Object,
+      default: () => {},
+    },
+    color: {
+      type: String,
+      default: () => '#83a4f8',
+    },
+  },
 }
 </script>
