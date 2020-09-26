@@ -72,7 +72,6 @@ const createStore = () => {
             `https://www.omdbapi.com/?apikey=55c7fd4a&s=${search}&page=${context.state.page}`
           )
           const data = await response.json()
-          console.log(data)
           context.commit('setMovies', data.Search)
           context.commit('setSearch', search)
         } catch (err) {
@@ -86,7 +85,6 @@ const createStore = () => {
             `https://www.omdbapi.com/?apikey=55c7fd4a&s=${context.state.search}&page=${context.state.page}`
           )
           const data = await response.json()
-          console.log(data)
           context.commit('loadMovies', data.Search)
         } catch (err) {
           context.commit('initPage')

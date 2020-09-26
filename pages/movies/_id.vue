@@ -3,7 +3,7 @@
     <v-row v-if="isLoading" justify="center" align="center">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-row>
-    <v-card v-else class="mx-auto">
+    <v-card v-else class="mx-auto" color="primary">
       <div class="d-flex flex-no-wrap justify-space-between">
         <div class="col-6">
           <v-card-title> {{ movie.Title }} </v-card-title>
