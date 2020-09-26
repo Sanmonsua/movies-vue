@@ -59,6 +59,7 @@ export default {
           path: '/movies',
         })
       } else {
+        setTimeout(() => (this.err = ''), 1500)
         this.err = 'Not Found :('
       }
       this.loading = false
