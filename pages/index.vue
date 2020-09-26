@@ -8,8 +8,8 @@
           </v-card-title>
           <v-col cols="12">
             <v-text-field
-              label="Search by title/imdb/year"
               v-model="search"
+              label="Search by title/imdb/year"
             ></v-text-field>
           </v-col>
 
@@ -20,15 +20,15 @@
               block
               tile
               :loading="loading"
-              @click="fetchMovies"
               :disabled="search.length ? false : true"
+              @click="fetchMovies"
             >
               Search
             </v-btn>
           </v-card-actions>
           <v-spacer />
         </v-card>
-        <v-alert dense outlined class="ma-10" type="error" v-if="err">{{
+        <v-alert v-if="err" dense outlined class="ma-10" type="error">{{
           err
         }}</v-alert>
       </v-col>

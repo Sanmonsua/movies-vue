@@ -17,10 +17,13 @@
 </template>
 
 <script>
-import Movie from '../components/Movie.vue'
-import colors from '../colors'
+import Movie from '../../components/Movie.vue'
+import colors from '../../colors'
 
 export default {
+  components: {
+    Movie,
+  },
   data() {
     return {
       isLoading: false,
@@ -34,16 +37,13 @@ export default {
       return (index) => colors[index % colors.length]
     },
   },
+  beforeDestroy() {
+    this.$store.commit('setSearch', '')
+  },
   methods: {
     async loadMore() {
       await this.$store.dispatch('loadMore')
     },
-  },
-  components: {
-    Movie,
-  },
-  beforeDestroy() {
-    this.$store.commit('setSearch', '')
   },
 }
 </script>
